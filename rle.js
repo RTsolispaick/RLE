@@ -41,7 +41,7 @@ function decodeRLE(string) {
         if (string.charAt(i) == "#") {
             count = string.charAt(i + 1).charCodeAt(0);
             string = string.replaceAll("#" + string.charAt(i + 1) + string.charAt(i + 2), (stringNow, indexString) => {
-                if (indexString == i) {
+                if (i == indexString) {
                     return string.charAt(i + 2).repeat(count);
                 } else {
                     return stringNow;
