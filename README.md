@@ -1,2 +1,4 @@
 # RLE!
-[image](https://user-images.githubusercontent.com/42037004/192096222-fdc69f44-429d-4084-a058-118a90f45b5d.png)
+Для обращения к rle.js:
+node rle.js code [имя кодируемого файла] [имя файла для сохранения кода]
+node rle.js decode [имя файла с кодом] [имя файла для сохранения декодирования]
