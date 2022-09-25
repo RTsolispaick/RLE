@@ -7,7 +7,7 @@
 
         while (string[i] == string[i + count] && count < 255) count++;
 
-        if (count > 3) {
+        if (count > 3 || string[i] == "#") {
             strCoder += "#" + String.fromCharCode(count) + string[i];
         }
         else {
