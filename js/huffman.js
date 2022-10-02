@@ -5,7 +5,7 @@ const code = codeObject(tree(sort(alph(text))));
 
 console.log("Frequency:");
 console.log(sort(alph(text)));
-console.log("CodeHap:");
+console.log("CodeHuf:");
 console.log(code);
 console.log("CodeString:");
 console.log(coderString(text));
@@ -43,14 +43,14 @@ function tree(arr) {
     }
 }
 
-function codeObject(arr, codeHap = "") {
+function codeObject(arr, codeHuf = "") {
     if (arr[0] instanceof Array) {
-        return Object.assign(codeObject(arr[0][0], codeHap + "0"), codeObject(arr[0][1], codeHap + "1"));
+        return Object.assign(codeObject(arr[0][0], codeHuf + "0"), codeObject(arr[0][1], codeHuf + "1"));
     } else {
-        if (codeHap == "") {
+        if (codeHuf == "") {
             return { [arr[0]]: "0" }
         } 
-        return { [arr[0]]: codeHap };
+        return { [arr[0]]: codeHuf };
     }
 }
 
