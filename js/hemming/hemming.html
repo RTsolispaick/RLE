@@ -1,0 +1,158 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <title>Hemming code</title>
+    <script>
+        //переводим из 10 в 2, каждый символ и складываем их в объект
+        function baitObjectText(text, Object = {}, twoParce = "") {
+            for (i = 0; i < text.length; i++) {
+                if (text[i] in Object) {
+                    continue;
+                } else {
+                    twoParce = text.charCodeAt(i).toString(2);
+                    while (twoParce.length != 8) {
+                        twoParce = "0" + twoParce;
+                    }
+                    Object[text[i]] = twoParce;
+                }
+            }
+
+            return Object;
+        }
+
+        //добавляем контрольные биты в кодировку
+        function objHammingDemo(obj) {
+            for (i in obj) {
+                obj[i] = "00" + obj[i];
+                obj[i] = obj[i].slice(0, 3) + "0" + obj[i].slice(3);
+                obj[i] = obj[i].slice(0, 7) + "0" + obj[i].slice(7);
+            }
+
+            return obj;
+        }
+
+        //строим объект с закодированными символами
+        function objHamming(obj, counterOne = 0, counterTwo = 0, counterFour = 0, counterEight = 0) {
+            for (j in obj) {
+                counterOne += obj[j][0] * 1 + obj[j][2] * 1 + obj[j][4] * 1 + obj[j][6] * 1 + obj[j][8] * 1 + obj[j][10] * 1;
+                counterTwo += obj[j][1] * 1 + obj[j][2] * 1 + obj[j][5] * 1 + obj[j][6] * 1 + obj[j][9] * 1 + obj[j][10] * 1;
+                counterFour += obj[j][3] * 1 + obj[j][4] * 1 + obj[j][5] * 1 + obj[j][6] * 1 + obj[j][11] * 1;
+                counterEight += obj[j][7] * 1 + obj[j][8] * 1 + obj[j][9] * 1 + obj[j][10] * 1 + obj[j][11] * 1;
+
+                if (counterOne % 2 != 0) {
+                    obj[j] = "1" + obj[j].slice(1);
+                }
+                if (counterTwo % 2 != 0) {
+                    obj[j] = obj[j].slice(0, 1) + "1" + obj[j].slice(2);
+                }
+                if (counterFour % 2 != 0) {
+                    obj[j] = obj[j].slice(0, 3) + "1" + obj[j].slice(4);
+                }
+                if (counterEight % 2 != 0) {
+                    obj[j] = obj[j].slice(0, 7) + "1" + obj[j].slice(8);
+                }
+                counterOne = 0;
+                counterTwo = 0;
+                counterFour = 0;
+                counterEight = 0;
+            }
+
+            return obj;
+        }
+
+        //записываем строку в двоичном виде по хеммингу
+        function coderHamming(codeString = "") {
+            let text = document.getElementById("inputMessage").value;
+            let construct = objHamming(objHammingDemo(baitObjectText(text)));
+            for (i = 0; i < text.length; i++) {
+                codeString += construct[text[i]];
+            }
+            document.getElementById("codedMessage").value = codeString;
+        }
+
+        //построение строки в двоичном виде с ошибками
+        function Error(codeError = "", place = "") {
+            let code = document.getElementById("codedMessage").value;
+            for (i = 0; i < code.length; i++) {
+                place += code[i];
+                if (place.length == 12) {
+                    let rand = Math.floor(Math.random() * 12)
+                    codeError += place.slice(0, rand) + String((1 * place[rand] + 1) % 2) + place.slice(rand + 1, 12);
+                    place = "";
+                }
+            }
+
+            document.getElementById("errorMessage").value = codeError;
+        } 
+
+        //разделяем по символьно строку и помещаем в массив
+        function decoderArrHammingDemo(code, arrDecode = [], place = "") {
+            for (i = 0; i < code.length; i++) {
+                place += code[i];
+                if (place.length == 12) {
+                    arrDecode.push(place);
+                    place = "";
+                }
+            }
+
+            return arrDecode;
+        }
+
+        //проверяем правильности передачи и корректируем биты по необходимости
+        function decoderArrHamming(arr, counterOne = 0, counterTwo = 0, counterFour = 0, counterEight = 0, counterError = 0) {
+            for (j in arr) {
+                counterOne += arr[j][0] * 1 + arr[j][2] * 1 + arr[j][4] * 1 + arr[j][6] * 1 + arr[j][8] * 1 + arr[j][10] * 1;
+                counterTwo += arr[j][1] * 1 + arr[j][2] * 1 + arr[j][5] * 1 + arr[j][6] * 1 + arr[j][9] * 1 + arr[j][10] * 1;
+                counterFour += arr[j][3] * 1 + arr[j][4] * 1 + arr[j][5] * 1 + arr[j][6] * 1 + arr[j][11] * 1;
+                counterEight += arr[j][7] * 1 + arr[j][8] * 1 + arr[j][9] * 1 + arr[j][10] * 1 + arr[j][11] * 1;
+
+                if (counterOne % 2 != 0) {
+                    counterError += 1;
+                }
+                if (counterTwo % 2 != 0) {
+                    counterError += 2;
+                }
+                if (counterFour % 2 != 0) {
+                    counterError += 4;
+                }
+                if (counterEight % 2 != 0) {
+                    counterError += 8;
+                }
+
+                if (counterError != 0) {
+                    arr[j] = arr[j].slice(0, counterError - 1) + String((1 * arr[j][counterError - 1] + 1) % 2) + arr[j].slice(counterError, 12);
+                }
+
+                counterOne = 0;
+                counterTwo = 0;
+                counterFour = 0;
+                counterEight = 0;
+                counterError = 0;
+            }
+
+            return arr;
+        }
+
+        //декодироиум коды хемминга и строим из них декодированную строку
+        function decoderHamming(decode = "") {
+            let code = document.getElementById("errorMessage").value;
+            let arr = decoderArrHamming(decoderArrHammingDemo(code));
+            for (j in arr) {
+                arr[j] = arr[j].slice(2, 3) + arr[j].slice(4, 7) + arr[j].slice(8, 12);
+                decode += String.fromCharCode(parseInt(arr[j], 2));
+            }
+
+            document.getElementById("encodedMessage").value = decode;
+        }
+    </script>
+</head>
+<body>
+    <h1>My Hamming Code</h1>
+    <p><input type="text" id="inputMessage" /> Message</p>
+    <p><input type="button" value="To code" onclick="coderHamming()" /></p>
+    <p><input type="text" id="codedMessage" /> Encoded message</p>
+    <p><input type="button" value="To error" onclick="Error()"/></p>
+    <p><input type="text" id="errorMessage" /> Error message</p>
+    <p><input type="button" value="To decode" onclick="decoderHamming()" /></p>
+    <p><input type="text" id="encodedMessage" /> Decoded message</p>
+</body>
+</html>
