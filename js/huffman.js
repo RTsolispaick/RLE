@@ -1,5 +1,5 @@
 const fs = require("fs");
-let text = fs.readFileSync("input.txt", "utf8");
+let text = fs.readFileSync(process.argv(2), "utf8");
 
 const code = codeObject(tree(sort(alph(text))));
 
