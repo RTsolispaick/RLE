@@ -1,0 +1,8 @@
+jsin 100
+set 101 -1
+set 102 1
+set 103 1
+mul 103 100 103
+add 100 101 100
+jscmp 100 102 11
+jsout 103
