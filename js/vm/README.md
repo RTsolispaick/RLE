@@ -12,5 +12,5 @@ Virtual machine:
   node vm.js program.txt  
   program.txt - выполняемая программа.  
   
-  Output:
+  Output:  
   В консоли. По завершении работы вывод "Finish";
