@@ -48,7 +48,3 @@ while (power) {
             break;
     }
 }
-
-
-
-
