@@ -1,1 +1,3 @@
-Процессор: AMD Ryzen 5 5500U with Radeon Graphics - 2.10 GHz
+Процессор: AMD Ryzen 5 5500U with Radeon Graphics - 2.10 GHz  
+Оперативная память: 8,00 ГБ (доступно: 7,34 ГБ)  
+Операционная система: Windows 10 Домашняя для одного языка(64)
