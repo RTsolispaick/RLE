@@ -62,35 +62,35 @@ console.log("test1");
 
 console.log("brute:");
 
-strA.brute("tom1.txt", "князь Андрей");
-strA.brute("tom12.txt", "князь Андрей");
-strA.brute("tom123.txt", "князь Андрей");
-strA.brute("tom1234.txt", "князь Андрей");
+strA.brute("tom1.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
+strA.brute("tom12.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
+strA.brute("tom123.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
+strA.brute("tom1234.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
 
 console.log("hash:");
 
-strA.hash("tom1.txt", "князь Андрей");
-strA.hash("tom12.txt", "князь Андрей");
-strA.hash("tom123.txt", "князь Андрей");
-strA.hash("tom1234.txt", "князь Андрей");
+strA.hash("tom1.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
+strA.hash("tom12.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
+strA.hash("tom123.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
+strA.hash("tom1234.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
 
 console.log("test2");
 
 console.log("brute:");
 
-strA.brute("tom1234.txt", "Андрей");
-strA.brute("tom1234.txt", "князь Андрей");
-strA.brute("tom1234.txt", "князь Андрей Болконский");
-strA.brute("tom1234.txt", "фортификация которых производилась");
-strA.brute("tom1234.txt", " которых производилось");
+strA.brute("tom1234.txt", "ГЂГ­Г¤Г°ГҐГ©");
+strA.brute("tom1234.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
+strA.brute("tom1234.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ© ГЃГ®Г«ГЄГ®Г­Г±ГЄГЁГ©");
+strA.brute("tom1234.txt", "ГґГ®Г°ГІГЁГґГЁГЄГ Г¶ГЁГї ГЄГ®ГІГ®Г°Г»Гµ ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГ«Г Г±Гј");
+strA.brute("tom1234.txt", " ГЄГ®ГІГ®Г°Г»Гµ ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГ«Г®Г±Гј");
 
 console.log("hash:");
 
-strA.hash("tom1234.txt", "Андрей");
-strA.hash("tom1234.txt", "князь Андрей");
-strA.hash("tom1234.txt", "князь Андрей Болконский");
-strA.hash("tom1234.txt", "фортификация которых производилась");
-strA.hash("tom1234.txt", " которых производилось");
+strA.hash("tom1234.txt", "ГЂГ­Г¤Г°ГҐГ©");
+strA.hash("tom1234.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ©");
+strA.hash("tom1234.txt", "ГЄГ­ГїГ§Гј ГЂГ­Г¤Г°ГҐГ© ГЃГ®Г«ГЄГ®Г­Г±ГЄГЁГ©");
+strA.hash("tom1234.txt", "ГґГ®Г°ГІГЁГґГЁГЄГ Г¶ГЁГї ГЄГ®ГІГ®Г°Г»Гµ ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГ«Г Г±Гј");
+strA.hash("tom1234.txt", " ГЄГ®ГІГ®Г°Г»Гµ ГЇГ°Г®ГЁГ§ГўГ®Г¤ГЁГ«Г®Г±Гј");
 
 console.log("test3");
 
