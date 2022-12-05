@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game of Life</title>
+    <canvas id="myCanvas" width="400"; height="400" style="border:1px solid #000000;">
+        Your browser does not support the HTML canvas tag.
+    </canvas>
+    <script>
+        let fillSize;
+        let cellSize;
+        let curPop;
+        let nextPop;
+        
+        let c = document.getElementById("myCanvas");
+        let ctx = c.getContext("2d");
+
+        function init() {
+            fillSize = document.getElementById("fillSize").value * 1;
+            cellSize = 400 / fillSize;
+            curPop = new Array(fillSize);
+            nextPop = new Array(fillSize);
+            for (let i = 0; i < fillSize; i++) {
+                curPop[i] = new Array(fillSize);
+                nextPop[i] = new Array(fillSize);
+            }
+            for (let i = 0; i < fillSize; i++) {
+                for (let j = 0; j < fillSize; j++) {
+                    curPop[i][j] = Math.round(Math.random());
+                }
+            }
+        }
+
+        function draw() {
+            for (let i = 0; i < fillSize; i++) {
+                for (let j = 0; j < fillSize; j++) {
+                    if (curPop[i][j] == 1)
+                        ctx.fillStyle = "#FFAAAA";
+                    else
+                        ctx.fillStyle = "#FFFFFF";
+                    ctx.fillRect(i * cellSize, j * cellSize, cellSize, cellSize);
+                }
+            }
+        }
+
+        function nextGen() {
+            for (let i = 0; i < fillSize; i++) {
+                for (let j = 0; j < fillSize; j++) {
+                    nextPop[i][j] = 0;
+                    if (((curPop[i][j] == 0) && (neighBro(i, j) == 3)) || ((curPop[i][j] == 1) && (neighBro(i, j) < 4) && (neighBro(i, j) > 1))) {
+                        nextPop[i][j] = 1;
+                    }
+                }
+            }
+            for (let i = 0; i < fillSize; i++) {
+                for (let j = 0; j < fillSize; j++) {
+                    curPop[i][j] = nextPop[i][j];
+                }
+            }
+        }
+
+        function neighBro(i, j) {
+            let num = 0;
+            for (let l = -1; l <= 1; l++) {
+                for (let k = -1; k <= 1; k++) {
+                    if ((l != 0) || (k != 0))
+                        num += curPop[(i + l + fillSize) % fillSize][(j + k + fillSize) % fillSize];
+                }
+            }
+            return num;
+        }
+
+        let flag = true;
+        let tm;
+
+        function step() {
+            nextGen();
+            draw();
+        }
+
+        function steptwo() {
+            nextGen();
+            draw();
+        }
+
+        function start() {
+            if (flag) init();
+            flag = false;
+            draw();
+            tm = setInterval(step, 100);
+        }
+
+        function stop() {
+            clearInterval(tm);
+        }
+
+    </script>
+</head>
+<body>
+    <p><input type="text" id="fillSize" /> Fill size</p>
+    <p><input type="button" value="Play" onclick="start()" /></p>
+    <p><input type="button" value="Stop" onclick="stop()" /></p>
+    <p><input type="button" value="Step" onclick="steptwo()" /></p>
+</body>
+</html>
+
