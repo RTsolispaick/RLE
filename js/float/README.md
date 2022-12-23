@@ -1,3 +1,6 @@
+command:  
+node newFloat.js 'mode'  
+
 input:  
 in.txt -> newFloat.js  
 output:  
