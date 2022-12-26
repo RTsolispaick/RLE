@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-//kolokol v kolokol
+//kolokol v kolokolokol
 let string = fs.readFileSync('str.txt', 'utf8');
 //kolokol
 let pattern = fs.readFileSync('pattern.txt', 'utf8');
